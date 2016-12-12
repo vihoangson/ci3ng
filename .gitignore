@@ -1,0 +1,16 @@
+bower_components
+node_modules
+vendor/
+.tmp/
+.sass-cache/
+.DS_Store
+
+## IDE & Sublime
+.idea/
+.settings/
+nbproject/
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
