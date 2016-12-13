@@ -1,0 +1,286 @@
+<div class="animate-panel" ng-init="ctrl.initData()">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4">
+                <div class="input-group pull-right">
+                    <input type="text" class="form-control" placeholder="search" ng-model="CustomersVM.GetSearchParam('SearchCode').Value" ng-change="CustomersVM.searchCustomers()" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="CustomersVM.searchCustomers()">
+                            <i class="glyphicon glyphicon-search"></i>Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div ng-show="Processing.GetProcessing('Customers').Value" class="row" style="z-index: 2000; position: absolute; left: 50%">
+            <div class="col-md-5 col-md-offset-5">
+                <img src="images/loading-bars.svg"  width="64" height="64" alt="Loading..." />
+            </div>
+        </div>
+        <div class="row">
+            <table width="100%" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <td class="k-header" style="text-align: center"></td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('Title')">Title  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Title'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Title'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Title'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('FirstName')">FirstName  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='FirstName'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='FirstName'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='FirstName'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('LastName')">LastName  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='LastName'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='LastName'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='LastName'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('FullName')">FullName  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='FullName'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='FullName'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='FullName'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('Gender')">Gender  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Gender'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Gender'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Gender'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('Dob')">Dob  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Dob'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Dob'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Dob'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('Age')">Age  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Age'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Age'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Age'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('PostalCode')">PostalCode  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='PostalCode'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='PostalCode'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='PostalCode'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('Email')">Email  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Email'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Email'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Email'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('Mobile')">Mobile  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Mobile'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Mobile'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Mobile'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('Nric')">Nric  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Nric'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Nric'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='Nric'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('AddressLine1')">AddressLine1  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='AddressLine1'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='AddressLine1'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='AddressLine1'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="CustomersVM.startSort('IsLoyal')">IsLoyal  
+                              <div ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='IsLoyal'" class="pull-right">
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='IsLoyal'&&CustomersVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="CustomersVM.SortedField!=null&&CustomersVM.SortedField.Name=='IsLoyal'&&CustomersVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="item in CustomersVM.ArrCustomer">
+                    <tr >
+                        <td style="text-align: center" class="col-md-1">
+                            <button class="btn btn-default" ng-show="item.allowedit" ng-click="startEditPopupCustomer(item)" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
+                            <button class="btn btn-default" ng-show="item.allowremove" ng-click="removeCustomer(item)" title="Remove"><i class="glyphicon glyphicon-trash"></i></button>
+                        </td>
+                       <td class="col-md-2">
+                           {{item.Title}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.FirstName}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.LastName}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.FullName}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.Gender}}
+                       </td>
+                      <td class="col-md-1">
+                           {{item.DobF}}
+                      </td>
+                       <td class="col-md-2">
+                           {{item.Age}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.PostalCode}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.Email}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.Mobile}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.Nric}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.AddressLine1}}
+                       </td>
+                       <td class="col-md-1">
+                           <i ng-show="item.IsLoyal==true" class="fa fa-check text-success"></i>
+                           <i ng-show="item.IsLoyal==false" class="fa fa-square text-success"></i>
+                       </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="14">
+                            <div class="row">
+                                <div class="control-group col-md-4">
+                                    <div class="controls">
+                                        <a class="btn btn-default" ng-click="startAddPopupCustomer()"><i class="glyphicon glyphicon-plus" title="New"></i>New</a>
+                                    </div>
+                                </div>
+                                <div class=" col-md-8">
+                                    <div class="pull-right">
+                                        <ul class="pagination">
+                                            <li><a>Total <b>{{ CustomersVM.Paging.TotalItems }}</b> items &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; Page <b>{{CustomersVM.Paging.PageIndex}} / {{CustomersVM.Paging.TotalPages }}</b></a></li>
+                                            <li ng-class="{disabled: CustomersVM.Paging.PageIndex==1}"><a ng-click="CustomersVM.gotoPrevPage()">&laquo;</a></li>
+                                            <li ng-repeat-start="page in CustomersVM.Paging.Pages" ng-class="{active: page == CustomersVM.Paging.PageIndex}">
+                                                <a ng-click="CustomersVM.gotoPage(page)">{{page}}</a>
+                                            </li>
+                                            <li ng-repeat-end class="divider"></li>
+                                            <li ng-class="{disabled:CustomersVM.Paging.PageIndex >= CustomersVM.Paging.TotalPages}"><a ng-click="CustomersVM.gotoNextPage()">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+   <div class="modal fade" id="popupCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px 10px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title">Customer</h5>
+                </div>
+                <div class="modal-body" ng-if="CustomerVM!=null">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" ng-show="CustomerVM.Processing.GetProcessing('Customer').Value">
+                                <div class="col-md-6 col-md-offset-6" style="position: absolute">
+                                    <img src="images/loading-bars.svg"  width="64" height="64" alt="Loading..." />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" ng-show="CustomerVM.Customer.isedit == true">
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlTitle">Title</label>
+                               <input id="ctrlTitle" type="text" ng-model="CustomerVM.Customer.Title"  ng-change="onChangeCustomer_Title(CustomerVM.Customer)" ng-class="[{'validateinput':ValManager().Get('Title').IsValid==false}]" class="form-control" />
+                               <div class="row" style="color: Red" data-bind="with:">
+                                    <span ng-visible="CustomerVM.Customer.valmanager.Get('Title').IsValid==false&&CustomerVM.Customer.valmanager.Get('Title').ValMsg!=''">{{CustomerVM.Customer.valmanager.Get('Title').ValMsg}}</span>
+                               </div>
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlFirstName">FirstName</label>
+                               <input id="ctrlFirstName" type="text" ng-model="CustomerVM.Customer.FirstName"  ng-change="onChangeCustomer_FirstName(CustomerVM.Customer)" ng-class="[{'validateinput':ValManager().Get('FirstName').IsValid==false}]" class="form-control" />
+                               <div class="row" style="color: Red" data-bind="with:">
+                                    <span ng-visible="CustomerVM.Customer.valmanager.Get('FirstName').IsValid==false&&CustomerVM.Customer.valmanager.Get('FirstName').ValMsg!=''">{{CustomerVM.Customer.valmanager.Get('FirstName').ValMsg}}</span>
+                               </div>
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlLastName">LastName</label>
+                               <input id="ctrlLastName" type="text" ng-model="CustomerVM.Customer.LastName"  ng-change="onChangeCustomer_LastName(CustomerVM.Customer)" ng-class="[{'validateinput':ValManager().Get('LastName').IsValid==false}]" class="form-control" />
+                               <div class="row" style="color: Red" data-bind="with:">
+                                    <span ng-visible="CustomerVM.Customer.valmanager.Get('LastName').IsValid==false&&CustomerVM.Customer.valmanager.Get('LastName').ValMsg!=''">{{CustomerVM.Customer.valmanager.Get('LastName').ValMsg}}</span>
+                               </div>
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlFullName">FullName</label>
+                           <input id="ctrlFullName" type = "text" ng-model = "CustomerVM.Customer.FullName"  class="form-control col-md-12" />
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlGender">Gender</label>
+                           <input id="ctrlGender" type = "text" ng-model = "CustomerVM.Customer.Gender"  class="form-control col-md-12" />
+                       </div>
+                       <div class="col-md-12">
+                           <label  class="control-label" for="ctrlDob">Dob</label>
+                               <input id="ctrlDob" type="date" ng-model="CustomerVM.Customer.Dob"  class="form-control col-md-12" />
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlAge">Age</label>
+                           <input id="ctrlAge" type = "text" ng-model = "CustomerVM.Customer.Age"  class="form-control col-md-12" />
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlPostalCode">PostalCode</label>
+                           <input id="ctrlPostalCode" type = "text" ng-model = "CustomerVM.Customer.PostalCode"  class="form-control col-md-12" />
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlEmail">Email</label>
+                               <input id="ctrlEmail" type="text" ng-model="CustomerVM.Customer.Email"  ng-change="onChangeCustomer_Email(CustomerVM.Customer)" ng-class="[{'validateinput':ValManager().Get('Email').IsValid==false}]" class="form-control" />
+                               <div class="row" style="color: Red" data-bind="with:">
+                                    <span ng-visible="CustomerVM.Customer.valmanager.Get('Email').IsValid==false&&CustomerVM.Customer.valmanager.Get('Email').ValMsg!=''">{{CustomerVM.Customer.valmanager.Get('Email').ValMsg}}</span>
+                               </div>
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlMobile">Mobile</label>
+                               <input id="ctrlMobile" type="text" ng-model="CustomerVM.Customer.Mobile"  ng-change="onChangeCustomer_Mobile(CustomerVM.Customer)" ng-class="[{'validateinput':ValManager().Get('Mobile').IsValid==false}]" class="form-control" />
+                               <div class="row" style="color: Red" data-bind="with:">
+                                    <span ng-visible="CustomerVM.Customer.valmanager.Get('Mobile').IsValid==false&&CustomerVM.Customer.valmanager.Get('Mobile').ValMsg!=''">{{CustomerVM.Customer.valmanager.Get('Mobile').ValMsg}}</span>
+                               </div>
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlNric">Nric</label>
+                           <input id="ctrlNric" type = "text" ng-model = "CustomerVM.Customer.Nric"  class="form-control col-md-12" />
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlAddressLine1">AddressLine1</label>
+                           <input id="ctrlAddressLine1" type = "text" ng-model = "CustomerVM.Customer.AddressLine1"  class="form-control col-md-12" />
+                       </div>
+                       <div class="col-md-1">
+                           <label class="control-label" for="ctrlIsLoyal">IsLoyal</label>
+                           <input id="ctrlIsLoyal" type="checkbox" class="i-checks" ng-model="CustomerVM.Customer.IsLoyal" />
+                       </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" ng-if="CustomerVM!=null">
+                    <div class="pull-right">
+                        <button class="btn btn-default" ng-click="finishEditPopupCustomer()">Save</button>&nbsp;
+                        <button type="button" class="btn  btn-default" data-dismiss="modal">
+                            Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

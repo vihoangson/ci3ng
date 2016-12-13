@@ -1,0 +1,166 @@
+<div class="animate-panel" ng-init="ctrl.initData()">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4">
+                <div class="input-group pull-right">
+                    <input type="text" class="form-control" placeholder="search" ng-model="ExpenseDetailsVM.GetSearchParam('SearchCode').Value" ng-change="ExpenseDetailsVM.searchExpenseDetails()" />
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="ExpenseDetailsVM.searchExpenseDetails()">
+                            <i class="glyphicon glyphicon-search"></i>Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div ng-show="Processing.GetProcessing('ExpenseDetails').Value" class="row" style="z-index: 2000; position: absolute; left: 50%">
+            <div class="col-md-5 col-md-offset-5">
+                <img src="images/loading-bars.svg"  width="64" height="64" alt="Loading..." />
+            </div>
+        </div>
+        <div class="row">
+            <table width="100%" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <td class="k-header" style="text-align: center"></td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="ExpenseDetailsVM.startSort('ExpenseId')">ExpenseId  
+                              <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ExpenseId'" class="pull-right">
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ExpenseId'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ExpenseId'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="ExpenseDetailsVM.startSort('ProductId')">ProductId  
+                              <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ProductId'" class="pull-right">
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ProductId'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ProductId'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="ExpenseDetailsVM.startSort('ItemName')">ItemName  
+                              <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ItemName'" class="pull-right">
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ItemName'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ItemName'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="ExpenseDetailsVM.startSort('Quantity')">Quantity  
+                              <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Quantity'" class="pull-right">
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Quantity'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Quantity'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="ExpenseDetailsVM.startSort('UnitPrice')">UnitPrice  
+                              <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='UnitPrice'" class="pull-right">
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='UnitPrice'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                  <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='UnitPrice'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                              </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="item in ExpenseDetailsVM.ArrExpenseDetail">
+                    <tr >
+                        <td style="text-align: center" class="col-md-1">
+                            <button class="btn btn-default" ng-show="item.allowedit" ng-click="startEditPopupExpenseDetail(item)" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
+                            <button class="btn btn-default" ng-show="item.allowremove" ng-click="removeExpenseDetail(item)" title="Remove"><i class="glyphicon glyphicon-trash"></i></button>
+                        </td>
+                       <td class="col-md-2">
+                           {{item.ExpenseName}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.ProductName}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.ItemName}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.Quantity}}
+                       </td>
+                       <td class="col-md-2">
+                           {{item.UnitPrice}}
+                       </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <div class="row">
+                                <div class="control-group col-md-4">
+                                    <div class="controls">
+                                        <a class="btn btn-default" ng-click="startAddPopupExpenseDetail()"><i class="glyphicon glyphicon-plus" title="New"></i>New</a>
+                                    </div>
+                                </div>
+                                <div class=" col-md-8">
+                                    <div class="pull-right">
+                                        <ul class="pagination">
+                                            <li><a>Total <b>{{ ExpenseDetailsVM.Paging.TotalItems }}</b> items &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; Page <b>{{ExpenseDetailsVM.Paging.PageIndex}} / {{ExpenseDetailsVM.Paging.TotalPages }}</b></a></li>
+                                            <li ng-class="{disabled: ExpenseDetailsVM.Paging.PageIndex==1}"><a ng-click="ExpenseDetailsVM.gotoPrevPage()">&laquo;</a></li>
+                                            <li ng-repeat-start="page in ExpenseDetailsVM.Paging.Pages" ng-class="{active: page == ExpenseDetailsVM.Paging.PageIndex}">
+                                                <a ng-click="ExpenseDetailsVM.gotoPage(page)">{{page}}</a>
+                                            </li>
+                                            <li ng-repeat-end class="divider"></li>
+                                            <li ng-class="{disabled:ExpenseDetailsVM.Paging.PageIndex >= ExpenseDetailsVM.Paging.TotalPages}"><a ng-click="ExpenseDetailsVM.gotoNextPage()">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+   <div class="modal fade" id="popupExpenseDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 10px 10px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title">ExpenseDetail</h5>
+                </div>
+                <div class="modal-body" ng-if="ExpenseDetailVM!=null">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" ng-show="ExpenseDetailVM.Processing.GetProcessing('ExpenseDetail').Value">
+                                <div class="col-md-6 col-md-offset-6" style="position: absolute">
+                                    <img src="images/loading-bars.svg"  width="64" height="64" alt="Loading..." />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" ng-show="ExpenseDetailVM.ExpenseDetail.isedit == true">
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlExpenseId">ExpenseId</label>
+                           <select id="ctrlExpenseId" ng-model = "ExpenseDetailVM.ExpenseDetail.ExpenseId" ng-options="obj.Name as obj.Id for obj in ExpensesVM.ArrExpense"></select>
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlProductId">ProductId</label>
+                           <select id="ctrlProductId" ng-model = "ExpenseDetailVM.ExpenseDetail.ProductId" ng-options="obj.Name as obj.Id for obj in ProductsVM.ArrProduct"></select>
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlItemName">ItemName</label>
+                           <input id="ctrlItemName" type = "text" ng-model = "ExpenseDetailVM.ExpenseDetail.ItemName"  class="form-control col-md-12" />
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlQuantity">Quantity</label>
+                           <input id="ctrlQuantity" type="number" ng-model = "ExpenseDetailVM.ExpenseDetail.Quantity" class="form-control col-md-12" />
+                       </div>
+                       <div class="col-md-12">
+                           <label class="control-label" for="ctrlUnitPrice">UnitPrice</label>
+                           <input id="ctrlUnitPrice" type="number" ng-model = "ExpenseDetailVM.ExpenseDetail.UnitPrice" class="form-control col-md-12" />
+                       </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" ng-if="ExpenseDetailVM!=null">
+                    <div class="pull-right">
+                        <button class="btn btn-default" ng-click="finishEditPopupExpenseDetail()">Save</button>&nbsp;
+                        <button type="button" class="btn  btn-default" data-dismiss="modal">
+                            Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

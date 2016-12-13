@@ -1,0 +1,160 @@
+<div class="animate-panel" ng-init="ctrl.initData()">
+    <div class="panel-body">
+        <div class="row searchpanel">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4" style="text-align: right;"> <label for="ctrlSearchType" >Type </label></div><div class="col-md-8">
+                    <select id="ctrlSearchType" ng-model="ExpenseDetailsVM.GetSearchParam('Expense.Type').Value"  class="form-control" ng-change="onChangeSelectType()" >
+                        <option value="">Select Type</option>
+                        <option value="Bill">Bill</option>
+                        <option value="ProductPurchase">Product Purchase</option>
+                </select></div>
+                </div>
+                <div class="row" ng-show="ExpenseDetailsVM.GetSearchParam('Expense.Type').Value == 'ProductPurchase'">
+                    <div class="col-md-4" style="text-align: right;"> <label for="ctrlSearchCategory" >Category </label></div><div class="col-md-8">
+                    <ui-select id="ctrlSearchCategory" ng-model="ExpenseDetailsVM.GetSearchParam('Product.CategoryId').Value" theme="bootstrap" >
+                        <ui-select-match placeholder="Select Category" allow-clear="true">{{$select.selected.Name}}</ui-select-match>
+                        <ui-select-choices repeat="obj.Id as obj in CategorysVM.ArrCategory|filter:{Name: $select.search}">
+                            <div ng-bind-html="obj.Name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    </div>
+                </div>
+                <div class="row" ng-show="ExpenseDetailsVM.GetSearchParam('Expense.Type').Value == 'ProductPurchase'">
+                    <div class="col-md-4" style="text-align: right;"> <label for="ctrlSearchCategory" >Product </label></div><div class="col-md-8">
+                    <ui-select id="ctrlSearchProduct" ng-model="ExpenseDetailsVM.GetSearchParam('ProductId').Value" theme="bootstrap" >
+                        <ui-select-match placeholder="Select Product" style="overflow: hidden"  allow-clear="true">{{$select.selected.Name}}</ui-select-match>
+                        <ui-select-choices repeat="obj.Id as obj in ProductsVM.ArrProduct|filter:{CategoryId:ExpenseDetailsVM.GetSearchParam('CategoryId').Value,Name: $select.search}">
+                            <div ng-bind-html="obj.Name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4" style="text-align: right;"> <label for="ctrlStartDate" >Start Date</label></div>
+                    <div class="col-md-8"> <input id="ctrlStartDate" ng-model="StartDate" type="date" class="form-control" /></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="text-align: right;"> <label for="ctrlEndDate" >End Date</label></div>
+                    <div class="col-md-8" ><input id="ctrlEndDate" ng-model="EndDate" type="date"  class="form-control" /></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="text-align: right;"> <label for="ctrlForDate" >For Date</label></div>
+                    <div class="col-md-8" ><input id="ctrlForDate" ng-model="ForDate" type="date"  class="form-control" ng-change="onChangeForDate()"/></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4" style="text-align: right;"> <label for="ctrlMinPrice" >Min Price</label></div>
+                    <div class="col-md-8"> <input id="ctrlMinPrice" ng-model="ExpenseDetailsVM.GetSearchParam('MinPrice').Value" type="number" class="form-control" /></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="text-align: right;"> <label for="ctrlMaxPrice" >Max Price</label></div>
+                    <div class="col-md-8" ><input id="ctrlMaxPrice" ng-model="ExpenseDetailsVM.GetSearchParam('MaxPrice').Value" type="number"  class="form-control" /></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="text-align: right;"> <label for="ctrlSearchCode" >Name / Item Name</label></div><div class="col-md-8"> <input id="ctrlSearchCode" ng-model="ExpenseDetailsVM.GetSearchParam('ItemName').Value" type="text" class="form-control" /></div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-4">
+                <button ng-click="searchExpenseDetails()" class="btn btn-primary" style=""><i class="fa fa-search"></i> Search</button>
+                <button ng-click="exportPdfExpenseDetails()" class="btn btn-default" style=""> <i class="fa fa-print"></i> Export to Pdf</button>
+            </div>
+        </div>
+        <br/>
+        <div ng-show="Processing.GetProcessing('ExpenseDetails').Value" class="row" style="z-index: 2000; position: absolute; left: 50%">
+            <div class="col-md-5 col-md-offset-5">
+                <img src="images/loading-bars.svg"  width="64" height="64" alt="Loading..." />
+            </div>
+        </div>
+        <div class="row">
+            <div class="contenttable">
+                <table width="100%" class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="ExpenseDetailsVM.startSort('Expense.Description')">Name
+                            <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Expense.Description'" class="pull-right">
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Expense.Description'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Expense.Description'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="ExpenseDetailsVM.startSort('Expense.InvoiceNo')" >Reference
+                            <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Expense.InvoiceNo'" class="pull-right">
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Expense.InvoiceNo'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Expense.InvoiceNo'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </td>
+                        <td class="k-header" style="text-align: center; cursor: pointer" ng-click="ExpenseDetailsVM.startSort('Expense.InvoiceDate')">Date
+                            <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Expense.InvoiceDate'" class="pull-right">
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Expense.InvoiceDate'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Expense.InvoiceDate'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </td>
+                        <td class="k-header" style="text-align:center; cursor: pointer" ng-click="ExpenseDetailsVM.startSort('ItemName')"> Item Name
+                            <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ItemName'" class="pull-right">
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ItemName'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='ItemName'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </td>
+                        <td class="k-header" style="text-align: center;cursor: pointer" ng-click="ExpenseDetailsVM.startSort('Total')" >Total
+                           <div ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Total'" class="pull-right">
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Total'&&ExpenseDetailsVM.SortedField.Direction==true"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                <a ng-show="ExpenseDetailsVM.SortedField!=null&&ExpenseDetailsVM.SortedField.Name=='Total'&&ExpenseDetailsVM.SortedField.Direction==false"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="item in ExpenseDetailsVM.ArrExpenseDetail">
+                    <tr ng-class="{'normalrow':(($index%2)==0),'alternativerow':($index%2!=0)}" >
+                       <td class="col-md-5">
+                          <strong> <a ui-sref="expense.detail({id:item.ExpenseId,type:item.Expense.Type})">{{item.Description}}</a></strong>
+                       </td>
+                       <td class="col-md-2">
+                           {{item.InvoiceNo}}
+                       </td>
+                      <td class="col-md-2">
+                           {{item.InvoiceDateF}}
+                      </td>
+                        <td class="col-md-2">
+                            {{item.ItemName}}
+                        </td>
+                       <td class="col-md-2">
+                           $ {{item.Total}}
+                       </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <div class="row">
+                                <div class="control-group col-md-4">
+                                    <div class="controls">
+                                    </div>
+                                </div>
+                                <div class=" col-md-8">
+                                    <div class="pull-right">
+                                        <ul class="pagination">
+                                            <li><a>Total <b>{{ ExpenseDetailsVM.Paging.TotalItems }}</b> items &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; Page <b>{{ExpenseDetailsVM.Paging.PageIndex}} / {{ExpenseDetailsVM.Paging.TotalPages }}</b></a></li>
+                                            <li ng-class="{disabled: ExpenseDetailsVM.Paging.PageIndex==1}"><a ng-click="ExpenseDetailsVM.gotoPrevPage()">&laquo;</a></li>
+                                            <li ng-repeat-start="page in ExpenseDetailsVM.Paging.Pages" ng-class="{active: page == ExpenseDetailsVM.Paging.PageIndex}">
+                                                <a ng-click="ExpenseDetailsVM.gotoPage(page)">{{page}}</a>
+                                            </li>
+                                            <li ng-repeat-end class="divider"></li>
+                                            <li ng-class="{disabled:ExpenseDetailsVM.Paging.PageIndex >= ExpenseDetailsVM.Paging.TotalPages}"><a ng-click="ExpenseDetailsVM.gotoNextPage()">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
