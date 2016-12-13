@@ -115,7 +115,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = '../application/kintai/';
+	$application_folder = '../application/kintai';
 
 /*
  *---------------------------------------------------------------

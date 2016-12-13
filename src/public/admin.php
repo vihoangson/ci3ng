@@ -115,7 +115,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = '../application/' . basename(__FILE__, '.php') . '/';
+	$application_folder = '../application/' . basename(__FILE__, '.php');
 
 /*
  *---------------------------------------------------------------
