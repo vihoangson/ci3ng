@@ -12,8 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config = array(
 	'default' => array(
-		'hostname' => '127.0.0.1',
-		'port'     => '11211',
+		'hostname' => env('MEMCACHED_HOST'),
+		'port'     => env('MEMCACHED_PORT'),
 		'weight'   => '1',
 	),
 );

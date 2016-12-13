@@ -10,8 +10,9 @@
   ],
   "require": {
     "chaos/common": "dev-master@dev",
+    "ezyang/htmlpurifier": "~4.8",
     "league/oauth2-client": "1.4.*",
-    "ezyang/htmlpurifier": "4.8.*",
+    "vlucas/phpdotenv": "~2.4",
     "codeigniter/framework": "3.1.*"
   },
   "require-dev": {
@@ -23,9 +24,7 @@
       "Shared\\": "application/shared/"
     },
     "files": [
-      "application/shared/Helpers/htmlpurifier_helper.php",
-      "application/shared/Helpers/language_helper.php",
-      "application/shared/Helpers/url_helper.php"
+      "application/shared/functions.php"
     ]
   },
   "minimum-stability": "dev",

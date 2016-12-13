@@ -4,6 +4,7 @@ vendor/
 .tmp/
 .sass-cache/
 .DS_Store
+.env
 
 ## IDE & Sublime
 .idea/
