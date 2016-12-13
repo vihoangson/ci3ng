@@ -1,4 +1,4 @@
-<?php namespace Application\Kintai\Controllers;
+<?php namespace Shared\Classes;
 
 use Chaos\Common\AbstractCodeIgniterRestController;
 

@@ -1,12 +1,10 @@
 <?php
 
-use Application\Kintai\Controllers\Controller;
-
 /**
  * Class Permission
  * @author ntd1712
  */
-class Permission extends \CI_Controller {
+class Permission extends \Shared\Classes\Controller {
 
     public function index()
     {
