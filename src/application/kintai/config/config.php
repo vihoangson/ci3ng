@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = env('APP_URL');
+$config['base_url'] = env('APP_URL', '');
 
 /*
 |--------------------------------------------------------------------------
@@ -213,7 +213,7 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = env('APP_LOG_LEVEL');
+$config['log_threshold'] = env('APP_LOG_LEVEL', 0);
 
 /*
 |--------------------------------------------------------------------------
@@ -367,9 +367,9 @@ $config['encryption_key'] = '';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = env('SESSION_DRIVER');
-$config['sess_cookie_name'] = env('COOKIE_PREFIX') . '_session';
-$config['sess_expiration'] = env('SESSION_LIFETIME');
+$config['sess_driver'] = env('SESSION_DRIVER', 'files');
+$config['sess_cookie_name'] = env('COOKIE_PREFIX', 'ci') . '_session';
+$config['sess_expiration'] = env('SESSION_LIFETIME', 7200);
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
@@ -390,8 +390,8 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= env('COOKIE_PREFIX');
-$config['cookie_domain']	= env('COOKIE_DOMAIN');
+$config['cookie_prefix']	= env('COOKIE_PREFIX', '');
+$config['cookie_domain']	= env('COOKIE_DOMAIN', '');
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
 $config['cookie_httponly'] 	= FALSE;

@@ -10,9 +10,4 @@ class Permission extends \Shared\Classes\Controller {
     {
         var_dump(__FUNCTION__);
     }
-
-    public function create()
-    {
-        var_dump(__FUNCTION__);
-    }
 }

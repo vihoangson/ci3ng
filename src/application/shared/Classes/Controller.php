@@ -15,8 +15,8 @@ abstract class Controller extends AbstractCodeIgniterRestController
             array_replace_recursive([
                 'app' => $config = get_config(),
                 'session' => [
-                    'expires' => $config['sess_expiration'],
                     'cookie' => $config['sess_cookie_name'],
+                    'expires' => $config['sess_expiration'],
                     'path' => $config['cookie_path'],
                     'domain' => $config['cookie_domain'],
                     'secure' => $config['cookie_secure'],
@@ -30,9 +30,9 @@ abstract class Controller extends AbstractCodeIgniterRestController
                     'username' => env('MAIL_USERNAME'),
                     'password' => env('MAIL_PASSWORD')
                 ],
-                'paths' => ['config' => $configPath = APPPATH . 'modules/config.params.php'],
+                'paths' => ['config' => $configPath = APPPATH . '/../shared/Modules/config.params.php'],
             ], require_once $configPath),
-            require_once APPPATH . 'modules/config.services.php'
+            require_once APPPATH . '/../shared/Modules/config.services.php'
         );
     }
 }

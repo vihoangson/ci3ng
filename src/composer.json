@@ -21,7 +21,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Shared\\": "application/shared/"
+      "Shared\\": "application/shared/",
+      "": "application/shared/Modules"
     },
     "files": [
       "application/shared/functions.php"
