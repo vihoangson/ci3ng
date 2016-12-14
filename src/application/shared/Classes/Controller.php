@@ -13,7 +13,9 @@ abstract class Controller extends AbstractCodeIgniterRestController
     {
         parent::__construct(
             array_replace_recursive([
-                'app' => $config = get_config(),
+                'app' => ($config = get_config()) + [
+                    'key' => env('APP_KEY')
+                ],
                 'session' => [
                     'cookie' => $config['sess_cookie_name'],
                     'expires' => $config['sess_expiration'],

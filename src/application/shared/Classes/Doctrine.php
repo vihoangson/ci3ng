@@ -1,4 +1,4 @@
-<?php
+<?php namespace Shared\Classes;
 
 use Doctrine\Common\ClassLoader,
     Doctrine\ORM\Configuration,
@@ -8,7 +8,6 @@ use Doctrine\Common\ClassLoader,
 
 /**
  * Class Doctrine
- * @author ntd1712
  */
 class Doctrine
 {
@@ -22,7 +21,7 @@ class Doctrine
 
         // Set up class loading. You could use different autoloaders, provided by your favorite framework,
         // if you want to.
-        require_once APPPATH . 'libraries/Doctrine/Common/ClassLoader.php';
+        // require_once APPPATH . '/../vendor/libraries/Doctrine/Common/ClassLoader.php';
 
         $doctrineClassLoader = new ClassLoader('Doctrine', APPPATH . 'libraries');
         $doctrineClassLoader->register();
