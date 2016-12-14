@@ -79,7 +79,7 @@ $db['default'] = array(
 	'username' => env('DB_USERNAME', ''),
 	'password' => env('DB_PASSWORD', ''),
 	'database' => env('DB_DATABASE', ''),
-	'dbdriver' => env('DB_DRIVER', 'mysqli'),
+	'dbdriver' => env('DB_DRIVER', 'mysql'),
 	'dbprefix' => env('DB_TABLE_PREFIX', ''),
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
