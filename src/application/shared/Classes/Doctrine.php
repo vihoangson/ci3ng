@@ -25,23 +25,23 @@ class Doctrine
 
         $doctrineClassLoader = new ClassLoader('Doctrine', APPPATH . 'libraries');
         $doctrineClassLoader->register();
-        $entitiesClassLoader = new ClassLoader('models', rtrim(APPPATH, "/"));
+        $entitiesClassLoader = new ClassLoader('entities', rtrim(APPPATH, "/"));
         $entitiesClassLoader->register();
-        $proxiesClassLoader = new ClassLoader('Proxies', APPPATH . 'models/proxies');
+        $proxiesClassLoader = new ClassLoader('Proxies', APPPATH . 'cache/doctrine/proxies');
         $proxiesClassLoader->register();
 
         // Set up caches
         $config = new Configuration;
         $cache = new ArrayCache;
         $config->setMetadataCacheImpl($cache);
-        $driverImpl = $config->newDefaultAnnotationDriver([APPPATH . 'models/Entities']);
+        $driverImpl = $config->newDefaultAnnotationDriver([APPPATH . 'shared/Modules/Account/Entities']);
         $config->setMetadataDriverImpl($driverImpl);
         $config->setQueryCacheImpl($cache);
 
         $config->setQueryCacheImpl($cache);
 
         // Proxy configuration
-        $config->setProxyDir(APPPATH . '/models/proxies');
+        $config->setProxyDir(APPPATH . 'cache/doctrine/proxies');
         $config->setProxyNamespace('Proxies');
 
         // Set up logger
