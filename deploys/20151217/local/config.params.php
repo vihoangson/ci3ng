@@ -8,15 +8,11 @@
         'minSearchChars' => 4,
         // specific
         'copyright' => '&copy; 2016 My Company',
-        'title' => 'D&#39;Artistry Hair Salon',
+        'title' => 'Admin Panel',
         'theme' => 'homer', // inspinia, homer, classic
-        'defaultRoute' => 'calendar',
+        'defaultRoute' => 'setting.index',
         'imageAllowedExt' => 'gif,jpeg,jpg,png',
-        'imageMaxSize' => 2097152, // 2MB
-        'sendBookingEmail' => 1,
-        'showAddEventLink' => 1,
-        'bookingEmailTitle' => 'Booking Conformation',
-        'eventLocation' => 'New Star Hairdressing Saloon, Singapore'
+        'imageMaxSize' => 2097152 // 2MB
     ],
     'paths' => [
         'api' => __DIR__ . '/../../../public/api',

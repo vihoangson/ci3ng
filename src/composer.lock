@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ntd1712/common.git",
-                "reference": "8f41a7f378a098c6904efe5b5d0d271170c148d3"
+                "reference": "ac8d20d8e7dd00a73ae344473796fc6d0529061f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ntd1712/common/zipball/8f41a7f378a098c6904efe5b5d0d271170c148d3",
-                "reference": "8f41a7f378a098c6904efe5b5d0d271170c148d3",
+                "url": "https://api.github.com/repos/ntd1712/common/zipball/ac8d20d8e7dd00a73ae344473796fc6d0529061f",
+                "reference": "ac8d20d8e7dd00a73ae344473796fc6d0529061f",
                 "shasum": ""
             },
             "archive": {
@@ -76,13 +76,14 @@
             "homepage": "http://taingheso.com",
             "keywords": [
                 "chaos",
+                "common",
                 "ntd1712"
             ],
             "support": {
                 "source": "https://github.com/ntd1712/common/tree/master",
                 "issues": "https://github.com/ntd1712/common/issues"
             },
-            "time": "2016-11-29 15:09:22"
+            "time": "2016-12-14 16:41:49"
         },
         {
             "name": "codeigniter/framework",

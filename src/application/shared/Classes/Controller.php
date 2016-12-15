@@ -13,9 +13,9 @@ abstract class Controller extends AbstractCodeIgniterRestController
     {
         parent::__construct(
             array_replace_recursive([
-                'app' => ($config = get_config()) + [
+                'app' => $config = get_config([
                     'key' => env('APP_KEY')
-                ],
+                ]),
                 'session' => [
                     'cookie' => $config['sess_cookie_name'],
                     'expires' => $config['sess_expiration'],
@@ -32,9 +32,9 @@ abstract class Controller extends AbstractCodeIgniterRestController
                     'username' => env('MAIL_USERNAME'),
                     'password' => env('MAIL_PASSWORD')
                 ],
-                'paths' => ['config' => $configPath = APPPATH . '/../shared/Modules/config.params.php'],
+                'paths' => ['config' => $configPath = __DIR__ . '/../Modules/config.params.php'],
             ], require_once $configPath),
-            require_once APPPATH . '/../shared/Modules/config.services.php'
+            require_once __DIR__ . '/../Modules/config.services.php'
         );
     }
 }

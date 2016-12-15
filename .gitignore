@@ -1,13 +1,20 @@
+*~
+*.bak
+*.log
+*.swp
+*.tmp
 bower_components
 node_modules
 vendor/
 .tmp/
 .sass-cache/
-.DS_Store
-.env
 
-## IDE & Sublime
+####################
+# Editor #
+####################
 .idea/
+.buildpath
+.project
 .settings/
 nbproject/
 *.tmlanguage.cache
@@ -15,3 +22,10 @@ nbproject/
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+
+####################
+# OS #
+####################
+._*
+.DS_Store
+Thumbs.db
