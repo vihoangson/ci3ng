@@ -9,6 +9,7 @@ vendor/
 .tmp/
 .sass-cache/
 .env
+config.params.php
 
 ####################
 # Editor #
