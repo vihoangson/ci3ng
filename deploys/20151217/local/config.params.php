@@ -7,9 +7,9 @@
         'maxItemsPerPage' => 100,
         'minSearchChars' => 4,
         // specific
-        'copyright' => '&copy; 2016 My Company',
+        'copyright' => 'Copyright 2016 My Company',
         'title' => 'Admin Panel',
-        'theme' => 'homer', // inspinia, homer, classic
+        'theme' => 'homer', // homer, inspinia, classic
         'defaultRoute' => 'setting.index',
         'imageAllowedExt' => 'gif,jpeg,jpg,png',
         'imageMaxSize' => 2097152 // 2MB
