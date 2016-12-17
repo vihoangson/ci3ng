@@ -53,4 +53,5 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['account/permission'] = 'account/permission';
+$route['api/account/permission/(:num)'] = 'api/account/permission/id/$1';
+$route['api/account/permission/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/account/permission/id/$1/format/$3$4';
