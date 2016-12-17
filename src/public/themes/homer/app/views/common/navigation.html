@@ -8,33 +8,6 @@
         <li class="vmenublue" ui-sref-active="active">
             <a ui-sref="calendar"><span class="nav-label">{{ 'DASHBOARD' | translate }}</span></a>
         </li>
-        <li class="vmenublue" ui-sref-active="active">
-            <a ui-sref="booking.management"><span class="nav-label">{{ 'BOOKING' | translate }}</span></a>
-        </li>
-        <li class="vmenugreen" ng-class="{ active: income_active }" ng-init="income_active = $state.includes('income')">
-            <a href="#"><span class="nav-label">{{ 'INCOME' | translate }}</span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level" ng-class="{ in: income_active }">
-                <li ui-sref-active="active"><a ui-sref="income.management">{{ 'MANAGE_INCOMES' | translate }}</a></li>
-                <li ui-sref-active="active"><a ui-sref="income.report">{{ 'REPORT' | translate }}</a></li>
-            </ul>
-        </li>
-        <li class="vmenugreen" ng-class="{ active: expense_active }" ng-init="expense_active = $state.includes('expense')">
-            <a href="#"><span class="nav-label">{{ 'EXPENSE' | translate }}</span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level" ng-class="{ in: expense_active }">
-                <li ui-sref-active="active"><a ui-sref="expense.management">{{ 'MANAGE_EXPENSES' | translate }}</a></li>
-                <li ui-sref-active="active"><a ui-sref="expense.report">{{ 'REPORT' | translate }}</a></li>
-            </ul>
-        </li>
-        <li class="vmenured" ng-class="{ active: store_active }"
-        ng-init="store_active = $state.includes('customer') || $state.includes('product') || $state.includes('category') || $state.includes('promotion')">
-            <a href="#"><span class="nav-label">{{ 'STORE' | translate }}</span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level" ng-class="{ in: store_active }">
-                <li ui-sref-active="active"><a ui-sref="customer.management">{{ 'CUSTOMER' | translate }}</a></li>
-                <li ui-sref-active="active"><a ui-sref="product.management">{{ 'PRODUCT' | translate }}</a></li>
-                <li ui-sref-active="active"><a ui-sref="category.management">{{ 'CATEGORY' | translate }}</a></li>
-                <li ui-sref-active="active"><a ui-sref="promotion.management">{{ 'PROMOTION' | translate }}</a></li>
-            </ul>
-        </li>
         <li class="vmenuorange" if-role="backend.account" ng-class="{ active: account_active }"
         ng-init="account_active = $state.includes('user') || $state.includes('role') || $state.includes('permission')">
             <a href="#"><span class="nav-label">{{ 'ACCOUNT' | translate }}</span><span class="fa arrow"></span></a>

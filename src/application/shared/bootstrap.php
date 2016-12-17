@@ -1,7 +1,7 @@
 <?php
 
-// register the composer auto loader
+// register Composer autoload
 require ($srcPath = __DIR__ . '/../../') . 'vendor/autoload.php';
 
-// load environment file
+// load .env
 (new Dotenv\Dotenv($srcPath))->load();

@@ -1,6 +1,6 @@
 {
   "name": "chaos/ci3ng",
-  "description": "A CodeIgniter 3 + Angular skeleton application",
+  "description": "A CodeIgniter 3 + Doctrine 2 + Angular skeleton application",
   "type": "project",
   "keywords": ["ntd1712", "chaos", "ci3ng"],
   "homepage": "http://taingheso.com",
@@ -13,7 +13,8 @@
     "ezyang/htmlpurifier": "~4.8",
     "league/oauth2-client": "1.4.*",
     "vlucas/phpdotenv": "~2.4",
-    "codeigniter/framework": "3.1.*"
+    "codeigniter/framework": "3.1.*",
+    "chriskacerguis/codeigniter-restserver": "2.7.*"
   },
   "require-dev": {
     "fzaninotto/faker": "dev-master",

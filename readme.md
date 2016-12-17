@@ -29,4 +29,5 @@ IncludeOptional "c:/wamp/www/ci3ng/deploys/20151217/local/httpd-vhosts.conf"
 # Create a new database named "ci3ng"
 # cd to the "src" directory, run the command "composer install" in Terminal
 # cd to the "src/public/themes/homer" directory, run the command "npm install"
+# Import DB from file "deploys/20151217/local/database/ci3ng.sql.zip" into your MySQL
 # Login information: demo[@example.com] / @demo*

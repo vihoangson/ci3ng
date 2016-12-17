@@ -3,31 +3,26 @@
 *.log
 *.swp
 *.tmp
-bower_components
-node_modules
-vendor/
-.tmp/
-.sass-cache/
-.env
-config.params.php
 
-####################
-# Editor #
-####################
-.idea/
-.buildpath
+# Bower, Composer, Node, Sass
+bower_components/
+vendor/
+node_modules/
+npm-debug.log*
+.sass-cache/
+.tmp/
+*.css.map
+
+# Eclipse, NetBeans, PhpStorm, SublimeText
 .project
+.buildpath
 .settings/
 nbproject/
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
-*.sublime-workspace
-*.sublime-project
+.idea/
+*.cache
+*.sublime-*
 
-####################
-# OS #
-####################
+# OS
 ._*
 .DS_Store
 Thumbs.db
