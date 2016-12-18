@@ -1,3 +1,4 @@
 <?php return [
-    'Account\Module'
+    'Account\Module',
+    'System\Module'
 ];

@@ -53,5 +53,11 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['api/account/permission/(:num)'] = 'api/account/permission/id/$1';
-$route['api/account/permission/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/account/permission/id/$1/format/$3$4';
+// Account
+$route['api/account/permission/(:any)'] = 'api/account/permission/$1';
+$route['api/account/role/(:any)'] = 'api/account/role/$1';
+$route['api/account/user/(:any)'] = 'api/account/user/$1';
+// System
+$route['api/system/audit/(:any)'] = 'api/system/audit/$1';
+$route['api/system/lookup/(:any)'] = 'api/system/lookup/$1';
+$route['api/system/setting/(:any)'] = 'api/system/setting/$1';

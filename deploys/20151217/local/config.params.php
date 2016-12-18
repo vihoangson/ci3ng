@@ -16,7 +16,7 @@
     ],
     'paths' => [
         'api' => __DIR__ . '/../../../public/api',
-        'upload' => __DIR__ . '/../../../public/uploads'
+        'uploads' => __DIR__ . '/../../../public/uploads'
     ],
     'urls' => [
         'reset' => '/#/reset?k=',

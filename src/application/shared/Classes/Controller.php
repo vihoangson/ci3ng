@@ -3,7 +3,8 @@
 use Doctrine\DBAL\Logging\DebugStack,
     Chaos\Common\AbstractCodeIgniterRestController;
 
-require __DIR__ . '/../../../vendor/chriskacerguis/codeigniter-restserver/application/libraries/REST_Controller.php';
+define('REST_Controller', __DIR__ . '/../../../vendor/chriskacerguis/codeigniter-restserver/application/libraries/REST_Controller.php');
+require_once REST_Controller;
 
 /**
  * Class Controller
