@@ -33,7 +33,7 @@ abstract class Controller extends AbstractCodeIgniterRestController
                 'orm' => [
                     'cache' => [
                         'provider' => env('CACHE_DRIVER', 'array'),
-                        'filesystem' => [
+                        'file' => [
                             'directory' => APPPATH . 'cache',
                             'extension' => '.' . $config['cookie_prefix'] . '.data'
                         ]

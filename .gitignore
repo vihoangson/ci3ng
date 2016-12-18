@@ -5,9 +5,9 @@
 *.tmp
 
 # Bower, Composer, Node, Sass
-bower_components/
+bower_components
 vendor/
-node_modules/
+node_modules
 npm-debug.log*
 .sass-cache/
 .tmp/
