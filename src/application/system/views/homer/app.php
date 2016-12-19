@@ -2,17 +2,17 @@
 <!doctype html>
 <html lang="<?= $config['app.locale']; ?>" ng-app="homer">
 <head>
-    <base href="<?= $config['app.base_url'] . 'themes/' . $config['app.theme'] . ($isProduction ? '/dist' : '/app') ; ?>/"/>
+    <base href="<?= $config['app.base_url'] . '/themes/' . $config['app.theme'] . ($isProduction ? '/dist' : '/app') ; ?>/"/>
     <meta charset="<?= $config['app.charset']; ?>"/>
     <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title page-title="<?= strip_tags($config['app.title']); ?>"></title>
     <link rel="shortcut icon" type="image/ico" href="<?= $config['app.base_url'] . 'favicon.ico'; ?>"/>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Montserrat:400,700|Dosis:400,500,600,700|EB+Garamond"/>
-    <?php if ($isProduction): ?>
+<?php if ($isProduction): ?>
     <link rel="stylesheet" href="styles/vendor.098540d4.css"/>
     <link rel="stylesheet" href="styles/style.bee160f9.css"/>
-    <?php else: ?>
+<?php else: ?>
     <link rel="stylesheet" href="../node_modules/animate.css/animate.css"/>
     <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../node_modules/datatables.net-bs/css/dataTables.bootstrap.css"/>
     <link rel="stylesheet" href="styles/style.css"/>
     <link rel="stylesheet" href="styles/custom.css"/>
-    <?php endif; ?>
+<?php endif; ?>
 </head>
 <body class="@{{ $state.current.data.specialClass }}" backdrop="true" ng-strict-di>
 <!--[if lt IE 7]>
@@ -76,6 +76,7 @@ window.CFG = <?= json_encode(['app' => $config['app'], 'session' => $config['ses
 <script src="scripts/account/permission/permission.route.js"></script>
 <script src="scripts/account/role/role.route.js"></script>
 <script src="scripts/account/user/user.route.js"></script>
+<script src="scripts/kintai/staff/staff.route.js"></script>
 <?php endif; ?>
 </body>
 </html><!-- developed by ntd1712 -->

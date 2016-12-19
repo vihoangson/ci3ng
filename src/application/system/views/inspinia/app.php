@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="<?= $config['app.locale']; ?>" ng-app="inspinia">
 <head>
-    <base href="<?= $config['app.base_url'] . 'themes/' . $config['app.theme'] . ($isProduction ? '/dist' : '/app') ; ?>/"/>
+    <base href="<?= $config['app.base_url'] . '/themes/' . $config['app.theme'] . ($isProduction ? '/dist' : '/app') ; ?>/"/>
     <meta charset="<?= $config['app.charset']; ?>"/>
     <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -29,55 +29,55 @@
 <![endif]-->
 <div ui-view autoscroll="true"></div>
 <?php if ($isProduction): ?>
-    <script src="scripts/vendor.cdd8522a.js"></script>
+<script src="scripts/vendor.cdd8522a.js"></script>
 <?php else: ?>
-    <script src="../node_modules/lockr/lockr.js"></script>
-    <script src="../node_modules/lodash/lodash.js"></script>
-    <script src="../node_modules/moment/moment.js"></script>
-    <script src="../node_modules/jquery/dist/jquery.js"></script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="../node_modules/bootstrap-sweetalert/dist/sweetalert.js"></script>
-    <script src="../node_modules/datatables.net/js/jquery.dataTables.js"></script>
-    <script src="../node_modules/drmonty-datatables-plugins/api/fnSetFilteringDelay.js"></script>
-    <script src="../node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
-    <script src="../node_modules/metismenu/dist/metisMenu.js"></script>
-    <script src="../node_modules/noty/js/noty/packaged/jquery.noty.packaged.js"></script>
-    <script src="../node_modules/angular/angular.js"></script>
-    <script src="../node_modules/angular-sanitize/angular-sanitize.js"></script>
-    <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
-    <script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="../node_modules/angular-datatables/dist/angular-datatables.js"></script>
-    <script src="../node_modules/angular-jwt/dist/angular-jwt.js"></script>
-    <script src="../node_modules/angular-translate/dist/angular-translate.js"></script>
-    <script src="../node_modules/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
-    <script src="../node_modules/oclazyload/dist/ocLazyLoad.js"></script>
+<script src="../node_modules/lockr/lockr.js"></script>
+<script src="../node_modules/lodash/lodash.js"></script>
+<script src="../node_modules/moment/moment.js"></script>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../node_modules/bootstrap-sweetalert/dist/sweetalert.js"></script>
+<script src="../node_modules/datatables.net/js/jquery.dataTables.js"></script>
+<script src="../node_modules/drmonty-datatables-plugins/api/fnSetFilteringDelay.js"></script>
+<script src="../node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+<script src="../node_modules/metismenu/dist/metisMenu.js"></script>
+<script src="../node_modules/noty/js/noty/packaged/jquery.noty.packaged.js"></script>
+<script src="../node_modules/angular/angular.js"></script>
+<script src="../node_modules/angular-sanitize/angular-sanitize.js"></script>
+<script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+<script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="../node_modules/angular-datatables/dist/angular-datatables.js"></script>
+<script src="../node_modules/angular-jwt/dist/angular-jwt.js"></script>
+<script src="../node_modules/angular-translate/dist/angular-translate.js"></script>
+<script src="../node_modules/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+<script src="../node_modules/oclazyload/dist/ocLazyLoad.js"></script>
 <?php endif; ?>
 <script>/*<![CDATA[*/
-    window.CFG = <?= json_encode(['app' => $config['app'], 'session' => $config['session'], 'urls' => $config['urls']]); ?>
-    /*]]>*/</script>
+window.CFG = <?= json_encode(['app' => $config['app'], 'session' => $config['session'], 'urls' => $config['urls']]); ?>
+/*]]>*/</script>
 <?php if ($isProduction): ?>
-    <script src="scripts/scripts.0c708101.js"></script>
+<script src="scripts/scripts.0c708101.js"></script>
 <?php else: ?>
-    <script src="scripts/theme.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="scripts/config.js"></script>
-    <script src="scripts/bundle.js"></script>
-    <script src="scripts/common/directives/directives.js"></script>
-    <script src="scripts/common/factories/abstract.model.js"></script>
-    <script src="scripts/common/factories/abstract.repository.js"></script>
-    <script src="scripts/common/factories/abstract.controller.js"></script>
-    <script src="scripts/common/providers/request.provider.js"></script>
-    <script src="scripts/system/auth/login.model.js"></script>
-    <script src="scripts/system/auth/login.repository.js"></script>
-    <script src="scripts/system/auth/login.controller.js"></script>
-    <script src="scripts/system/auth/login.route.js"></script>
-    <script src="scripts/system/audit/audit.route.js"></script>
-    <script src="scripts/system/lookup/lookup.route.js"></script>
-    <script src="scripts/system/setting/setting.route.js"></script>
-    <script src="scripts/account/permission/permission.route.js"></script>
-    <script src="scripts/account/role/role.route.js"></script>
-    <script src="scripts/account/user/user.route.js"></script>
-    <script src="scripts/kintai/staff/staff.route.js"></script>
+<script src="scripts/theme.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/config.js"></script>
+<script src="scripts/bundle.js"></script>
+<script src="scripts/common/directives/directives.js"></script>
+<script src="scripts/common/factories/abstract.model.js"></script>
+<script src="scripts/common/factories/abstract.repository.js"></script>
+<script src="scripts/common/factories/abstract.controller.js"></script>
+<script src="scripts/common/providers/request.provider.js"></script>
+<script src="scripts/system/auth/login.model.js"></script>
+<script src="scripts/system/auth/login.repository.js"></script>
+<script src="scripts/system/auth/login.controller.js"></script>
+<script src="scripts/system/auth/login.route.js"></script>
+<script src="scripts/system/audit/audit.route.js"></script>
+<script src="scripts/system/lookup/lookup.route.js"></script>
+<script src="scripts/system/setting/setting.route.js"></script>
+<script src="scripts/account/permission/permission.route.js"></script>
+<script src="scripts/account/role/role.route.js"></script>
+<script src="scripts/account/user/user.route.js"></script>
+<script src="scripts/kintai/staff/staff.route.js"></script>
 <?php endif; ?>
 </body>
 </html><!-- developed by ntd1712 -->

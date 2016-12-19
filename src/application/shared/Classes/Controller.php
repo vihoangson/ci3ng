@@ -16,13 +16,15 @@ abstract class Controller extends AbstractCodeIgniterRestController
     {
         global $active_group, $db;
         require_once APPPATH . 'config/database.php';
+        $config = get_config();
 
         parent::__construct(
             array_replace_recursive([
-                'app' => $config = get_config([
+                'app' => [
+                    'charset' => $config['charset'],
                     'key' => env('APP_KEY'),
-                    'url' => rtrim(config_item('base_url'), '/')
-                ]),
+                    'url' => rtrim($config['base_url'], '/')
+                ],
                 'db' => $db[$active_group] + [
                     'driver' => $db[$active_group]['dbdriver'],
                     'user' => $db[$active_group]['username'],
@@ -35,7 +37,7 @@ abstract class Controller extends AbstractCodeIgniterRestController
                     'cache' => [
                         'provider' => env('CACHE_DRIVER', 'array'),
                         'file' => [
-                            'directory' => APPPATH . 'cache',
+                            'directory' => $config['cache_path'],
                             'extension' => '.' . $config['cookie_prefix'] . '.data'
                         ]
                     ],
@@ -46,11 +48,11 @@ abstract class Controller extends AbstractCodeIgniterRestController
                     ],
                     'proxy_classes' => [
                         'auto_generate' => $db[$active_group]['db_debug'] ? 2 : 0,
-                        'directory' => APPPATH . 'cache/proxies',
+                        'directory' => $config['cache_path'] . 'proxies' . DIRECTORY_SEPARATOR,
                         'namespace' => null,
                     ],
                     'debug' => $db[$active_group]['db_debug'],
-                    'default_repository' => 'Doctrine\ORM\EntityRepository',
+                    'default_repository' => DOCTRINE_ENTITY_REPOSITORY,
                     'sql_logger' => $db[$active_group]['db_debug'] ? new DebugStack : null,
                 ],
                 'mail' => [
