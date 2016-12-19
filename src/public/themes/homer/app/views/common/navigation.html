@@ -6,7 +6,7 @@
     <!-- side menu -->
     <ul class="nav" id="side-menu" side-navigation>
         <li class="vmenublue" ui-sref-active="active">
-            <a ui-sref="calendar"><span class="nav-label">{{ 'DASHBOARD' | translate }}</span></a>
+            <a ui-sref="staff.index"><span class="nav-label">{{ 'DASHBOARD' | translate }}</span></a>
         </li>
         <li class="vmenuorange" if-role="backend.account" ng-class="{ active: account_active }"
         ng-init="account_active = $state.includes('user') || $state.includes('role') || $state.includes('permission')">
@@ -35,7 +35,6 @@
                 </li>
             </ul>
         </li>
-        <!--
         <li class="vmenubrown" if-role="backend.system" ng-class="{ active: system_active }"
         ng-init="system_active = $state.includes('setting') || $state.includes('lookup') || $state.includes('audit')">
             <a href="#"><span class="nav-label">{{ 'SYSTEM' | translate }}</span><span class="fa arrow"></span></a>
@@ -59,6 +58,5 @@
                 </li>
             </ul>
         </li>
-        -->
     </ul>
 </div>

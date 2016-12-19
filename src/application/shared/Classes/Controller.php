@@ -20,7 +20,8 @@ abstract class Controller extends AbstractCodeIgniterRestController
         parent::__construct(
             array_replace_recursive([
                 'app' => $config = get_config([
-                    'key' => env('APP_KEY')
+                    'key' => env('APP_KEY'),
+                    'url' => config_item('base_url')
                 ]),
                 'db' => $db[$active_group] + [
                     'driver' => $db[$active_group]['dbdriver'],
