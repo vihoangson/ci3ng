@@ -72,6 +72,7 @@ abstract class Controller extends AbstractCodeIgniterRestController
                     'http_only' => $config['cookie_httponly']
                 ],
                 'paths' => ['config' => $configPath = __DIR__ . '/../Modules/config.params.php'],
+                'urls' => ['api' => '/' . trim($config['index_page'], '/') . '/api/']
             ], require_once $configPath),
             require_once __DIR__ . '/../Modules/config.services.php'
         );

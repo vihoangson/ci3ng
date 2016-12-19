@@ -2,6 +2,7 @@
 
 /**
  * Class Welcome
+ * @author ntd1712
  */
 class Welcome extends \Shared\Classes\Controller
 {
