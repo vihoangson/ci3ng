@@ -11,6 +11,7 @@
   "require": {
     "chaos/common": "dev-master@dev",
     "ezyang/htmlpurifier": "~4.8",
+    "firebase/php-jwt": "4.0.*",
     "league/oauth2-client": "1.4.*",
     "vlucas/phpdotenv": "~2.4",
     "codeigniter/framework": "3.1.*",
