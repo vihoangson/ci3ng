@@ -52,3 +52,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+foreach (glob(APPPATH . '/controllers/api/*/*.*') as $v)
+{
+    preg_match('#controllers/(api/[^.]+).*#i', $v, $matches);
+
+    if (isset($matches[1]))
+    {
+        $route[($matches[1] = strtolower($matches[1])) . '/(:any)'] = $matches[1] . '/$1';
+    }
+}

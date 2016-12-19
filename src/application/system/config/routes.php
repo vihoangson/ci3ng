@@ -53,11 +53,12 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// Account
-$route['api/account/permission/(:any)'] = 'api/account/permission/$1';
-$route['api/account/role/(:any)'] = 'api/account/role/$1';
-$route['api/account/user/(:any)'] = 'api/account/user/$1';
-// System
-$route['api/system/audit/(:any)'] = 'api/system/audit/$1';
-$route['api/system/lookup/(:any)'] = 'api/system/lookup/$1';
-$route['api/system/setting/(:any)'] = 'api/system/setting/$1';
+foreach (glob(APPPATH . '/controllers/api/*/*.*') as $v)
+{
+    preg_match('#controllers/(api/[^.]+).*#i', $v, $matches);
+
+    if (isset($matches[1]))
+    {
+        $route[($matches[1] = strtolower($matches[1])) . '/(:any)'] = $matches[1] . '/$1';
+    }
+}

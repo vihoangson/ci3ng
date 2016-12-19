@@ -22,13 +22,14 @@ abstract class Controller extends AbstractCodeIgniterRestController
                 'app' => $config = get_config([
                     'key' => env('APP_KEY')
                 ]),
-                'db' => [
+                'db' => $db[$active_group] + [
                     'driver' => $db[$active_group]['dbdriver'],
                     'user' => $db[$active_group]['username'],
                     'host' => $db[$active_group]['hostname'],
                     'dbname' => $db[$active_group]['database'],
+                    'prefix' => $db[$active_group]['dbprefix'],
                     'charset' => $db[$active_group]['char_set']
-                ] + $db[$active_group],
+                ],
                 'orm' => [
                     'cache' => [
                         'provider' => env('CACHE_DRIVER', 'array'),
@@ -42,13 +43,13 @@ abstract class Controller extends AbstractCodeIgniterRestController
                         'paths' => require_once __DIR__ . '/../Modules/doctrine.paths.php',
                         'simple' => false
                     ],
-                    'proxy' => [
+                    'proxy_classes' => [
                         'auto_generate' => $db[$active_group]['db_debug'] ? 2 : 0,
-                        'dir' => APPPATH . 'cache/proxies',
+                        'directory' => APPPATH . 'cache/proxies',
                         'namespace' => null,
                     ],
+                    'debug' => $db[$active_group]['db_debug'],
                     'default_repository' => 'Doctrine\ORM\EntityRepository',
-                    'is_dev_mode' => $db[$active_group]['db_debug'],
                     'sql_logger' => $db[$active_group]['db_debug'] ? new DebugStack : null,
                 ],
                 'mail' => [
