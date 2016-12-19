@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class Spa
+ * Class Welcome
  */
-class Spa extends \Shared\Classes\Controller
+class Welcome extends \Shared\Classes\Controller
 {
     /**
      * Single-page application
