@@ -21,6 +21,9 @@
     "mikey179/vfsStream": "1.1.*"
   },
   "autoload": {
+    "classmap": [
+      "vendor/chriskacerguis/codeigniter-restserver/application/libraries/REST_Controller.php"
+    ],
     "psr-4": {
       "Shared\\": "application/shared/",
       "": "application/shared/Modules/"
