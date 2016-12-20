@@ -106,4 +106,12 @@ class Auth extends \Shared\Classes\Controller
         $this->session->unset_userdata(['locale', 'loggedName', 'loggedUser']);
         $this->set_response(['success' => true]);
     }
+
+    /**
+     * The "renewtoken" action
+     * @todo
+     */
+    public function renewtoken_post()
+    {
+    }
 }
