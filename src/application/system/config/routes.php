@@ -60,6 +60,14 @@ foreach (glob(APPPATH . '/controllers/api/*/*.*') as $v)
 
     if (isset($matches[1]))
     {
-        $route[($matches[1] = strtolower($matches[1])) . '/(:any)'] = $matches[1] . '/$1';
+        $route[$matches[1] = strtolower($matches[1])] = [
+            'get' => $matches[1] . '/index',
+            'post' => $matches[1] . '/store'
+        ];
+        $route[$matches[1] . '/(:num)'] = [
+            'get' => $matches[1] . '/show/id/$1',
+            'put' => $matches[1] . '/update/id/$1',
+            'delete' => $matches[1] . '/destroy/id/$1',
+        ];
     }
 }
