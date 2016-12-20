@@ -11,15 +11,16 @@
   "require": {
     "chaos/common": "dev-master@dev",
     "ezyang/htmlpurifier": "~4.8",
-    "firebase/php-jwt": "4.0.*",
+    "firebase/php-jwt": "~4.0",
     "league/oauth2-client": "1.4.*",
+    "nesbot/carbon": "~1.21",
     "vlucas/phpdotenv": "~2.4",
     "codeigniter/framework": "3.1.*",
     "chriskacerguis/codeigniter-restserver": "2.7.*"
   },
   "require-dev": {
     "fzaninotto/faker": "dev-master",
-    "mikey179/vfsStream": "1.1.*"
+    "mikey179/vfsStream": "~1.6"
   },
   "autoload": {
     "classmap": [

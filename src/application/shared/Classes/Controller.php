@@ -23,7 +23,7 @@ abstract class Controller extends AbstractCodeIgniterRestController
                 'app' => [
                     'charset' => $config['charset'],
                     'key' => env('APP_KEY'),
-                    'url' => rtrim($config['base_url'], '/')
+                    'url' => trim($config['base_url'], '/')
                 ],
                 'db' => $db[$active_group] + [
                     'driver' => $db[$active_group]['dbdriver'],

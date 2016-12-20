@@ -1,14 +1,16 @@
 <?php
 
-use Firebase\JWT\JWT,
+use Carbon\Carbon,
+    Firebase\JWT\JWT,
     Chaos\Common\Exceptions\ValidateException;
 
 /**
  * Class Auth
  * @author ntd1712
  *
- * @method array|string|NULL post($key = NULL, $xss_clean = NULL)
+ * @method array|string|null post($key = null, $xss_clean = null)
  * @property-read \CI_Session $session
+ * @property-read \CI_URI $uri
  */
 class Auth extends \Shared\Classes\Controller
 {
@@ -28,7 +30,8 @@ class Auth extends \Shared\Classes\Controller
         // are we logging out, or doing something else?
         if (true === (bool)$this->post('logout'))
         {
-            return $this->logout_post();
+            $this->logout_post();
+            return;
         }
 
         // do some checks
@@ -70,15 +73,14 @@ class Auth extends \Shared\Classes\Controller
             }
         }
 
-        $ts = (new DateTime)->getTimestamp();
         $token = JWT::encode([
             'res' => $user,
-            'sub' => 2,
-            'iss' => 'http://kintai.local/api/auth/login',
-            'iat' => $ts,
-            'exp' => $ts + 60 * 60 * 5,
+            'sub' => $entity->getId(),
+            'iss' => $this->getConfig()->get('app.url') . '/' . $this->uri->uri_string,
+            'iat' => $ts = Carbon::now()->timestamp,
+            'exp' => Carbon::now()->addSeconds($this->getConfig()->get('expires.expires'))->timestamp,
             'nbf' => $ts,
-            'jti' => md5(sprintf('jti.%s.%s', 2, $ts))
+            'jti' => md5(sprintf('jti.%s.%s', $entity->getId(), $ts))
         ], $this->getConfig()->get('app.key'));
 
         // save into session
@@ -102,6 +104,6 @@ class Auth extends \Shared\Classes\Controller
         // catch (JWTException $e) {}
 
         $this->session->unset_userdata(['locale', 'loggedName', 'loggedUser']);
-        $this->response(['success' => true]);
+        $this->set_response(['success' => true]);
     }
 }
