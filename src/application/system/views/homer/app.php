@@ -2,12 +2,12 @@
 <!doctype html>
 <html lang="<?= $config['app.locale']; ?>" ng-app="homer">
 <head>
-    <base href="<?= $config['app.base_url'] . '/themes/' . $config['app.theme'] . ($isProduction ? '/dist' : '/app') ; ?>/"/>
+    <base href="<?= sprintf('%s/themes/%s/%s/', $config['app.url'], $config['app.theme'], $isProduction ? 'dist' : 'app') ; ?>"/>
     <meta charset="<?= $config['app.charset']; ?>"/>
     <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title page-title="<?= strip_tags($config['app.title']); ?>"></title>
-    <link rel="shortcut icon" type="image/ico" href="<?= $config['app.base_url'] . 'favicon.ico'; ?>"/>
+    <link rel="shortcut icon" type="image/ico" href="<?= $config['app.url'] . '/favicon.ico'; ?>"/>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Montserrat:400,700|Dosis:400,500,600,700|EB+Garamond"/>
 <?php if ($isProduction): ?>
     <link rel="stylesheet" href="styles/vendor.098540d4.css"/>

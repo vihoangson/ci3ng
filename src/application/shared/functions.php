@@ -89,6 +89,53 @@ if (!function_exists('startsWith'))
     }
 }
 
+if (!function_exists('purify'))
+{
+    /**
+     * @param   $dirty_html
+     * @param   string|array|HTMLPurifier_Config|mixed $config
+     * @param   string $encoding
+     * @return  string|array
+     */
+    function purify($dirty_html, $config = false, $encoding = 'UTF-8')
+    {
+        if (is_array($dirty_html))
+        {
+            $clean_html = [];
+
+            foreach ($dirty_html as $k => $v)
+            {
+                $clean_html[$k] = purify($v, $config, $encoding);
+            }
+        }
+        else
+        {
+            switch ($config)
+            {
+                case 'comment':
+                    $config = HTMLPurifier_Config::createDefault();
+                    $config->set('Core.Encoding', $encoding);
+                    $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
+                    $config->set('HTML.Allowed', 'p,a[href|title],abbr[title],acronym[title],b,strong,blockquote[cite],code,em,i,strike');
+                    $config->set('AutoFormat.AutoParagraph', true);
+                    $config->set('AutoFormat.Linkify', true);
+                    $config->set('AutoFormat.RemoveEmpty', true);
+                    break;
+                case false:
+                    $config = HTMLPurifier_Config::createDefault();
+                    $config->set('Core.Encoding', 'UTF-8');
+                    $config->set('HTML.Doctype', 'XHTML 1.0 Strict');
+                default:
+            }
+
+            $purifier = new HTMLPurifier($config);
+            $clean_html = $purifier->purify($dirty_html);
+        }
+
+        return $clean_html;
+    }
+}
+
 if (!function_exists('value'))
 {
     /**
