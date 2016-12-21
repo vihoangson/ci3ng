@@ -23,7 +23,7 @@ abstract class Controller extends AbstractCodeIgniterRestController
                 'app' => [
                     'charset' => $config['charset'],
                     'key' => env('APP_KEY'),
-                    'url' => trim($config['base_url'], '/')
+                    'url' => rtrim($config['base_url'], '/')
                 ],
                 'db' => $db[$active_group] + [
                     'driver' => $db[$active_group]['dbdriver'],
@@ -72,7 +72,7 @@ abstract class Controller extends AbstractCodeIgniterRestController
                     'http_only' => $config['cookie_httponly']
                 ],
                 'paths' => ['config' => $configPath = __DIR__ . '/../Modules/config.params.php'],
-                'urls' => ['api' => '/' . trim($config['index_page'], '/') . '/api/']
+                'urls' => ['api' => empty($config['index_page']) ? '/api/' : '/' . $config['index_page'] . '/api/']
             ], require_once $configPath),
             require_once __DIR__ . '/../Modules/config.services.php'
         );

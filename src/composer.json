@@ -11,7 +11,7 @@
   "require": {
     "chaos/common": "dev-master@dev",
     "ezyang/htmlpurifier": "~4.8",
-    "firebase/php-jwt": "~4.0",
+    "firebase/php-jwt": "4.0.*",
     "league/oauth2-client": "1.4.*",
     "nesbot/carbon": "~1.21",
     "vlucas/phpdotenv": "~2.4",
@@ -39,5 +39,13 @@
   "config": {
     "discard-changes": true,
     "preferred-install": "dist"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "sh update"
+    ],
+    "post-update-cmd": [
+      "sh update"
+    ]
   }
 }
