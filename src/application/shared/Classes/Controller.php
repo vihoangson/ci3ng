@@ -48,7 +48,7 @@ abstract class Controller extends AbstractCodeIgniterRestController
                     ],
                     'proxy_classes' => [
                         'auto_generate' => $db[$active_group]['db_debug'] ? 2 : 0,
-                        'directory' => $config['cache_path'] . 'proxies' . DIRECTORY_SEPARATOR,
+                        'directory' => $config['cache_path'] . 'proxies/',
                         'namespace' => null,
                     ],
                     'debug' => $db[$active_group]['db_debug'],
