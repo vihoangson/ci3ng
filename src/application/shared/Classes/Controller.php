@@ -14,9 +14,9 @@ abstract class Controller extends AbstractCodeIgniterRestController
     /** {@inheritdoc} */
     public function __construct()
     {
-        global $active_group, $db;
-        require_once APPPATH . 'config/database.php';
+        static $active_group, $db;
         $config = get_config();
+        require_once APPPATH . 'config/database.php';
 
         parent::__construct(
             array_replace_recursive([

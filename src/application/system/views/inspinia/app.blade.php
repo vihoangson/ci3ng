@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto:400,300,500,700"/>
 <?php if ($isProduction): ?>
     <link rel="stylesheet" href="styles/vendor.098540d4.css"/>
-    <link rel="stylesheet" href="styles/style.bee160f9.css"/>
+    <link rel="stylesheet" href="styles/style.84f5fbd4.css"/>
 <?php else: ?>
     <link rel="stylesheet" href="../node_modules/animate.css/animate.css"/>
     <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.css"/>
@@ -29,7 +29,7 @@
 <![endif]-->
 <div ui-view autoscroll="true"></div>
 <?php if ($isProduction): ?>
-<script src="scripts/vendor.cdd8522a.js"></script>
+<script src="scripts/vendor.1a0e16bf.js"></script>
 <?php else: ?>
 <script src="../node_modules/lockr/lockr.js"></script>
 <script src="../node_modules/lodash/lodash.js"></script>
@@ -56,7 +56,7 @@
 window.CFG = <?= json_encode(['app' => $config['app'], 'session' => $config['session'], 'urls' => $config['urls']]); ?>
 /*]]>*/</script>
 <?php if ($isProduction): ?>
-<script src="scripts/scripts.0c708101.js"></script>
+<script src="scripts/scripts.be176233.js"></script>
 <?php else: ?>
 <script src="scripts/theme.js"></script>
 <script src="scripts/app.js"></script>

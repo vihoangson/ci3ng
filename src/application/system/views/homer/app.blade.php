@@ -29,7 +29,7 @@
 <![endif]-->
 <div ui-view autoscroll="true"></div>
 <?php if ($isProduction): ?>
-<script src="scripts/vendor.cdd8522a.js"></script>
+<script src="scripts/vendor.9b5e2a67.js"></script>
 <?php else: ?>
 <script src="../node_modules/lockr/lockr.js"></script>
 <script src="../node_modules/lodash/lodash.js"></script>
@@ -55,7 +55,7 @@
 window.CFG = <?= json_encode(['app' => $config['app'], 'session' => $config['session'], 'urls' => $config['urls']]); ?>
 /*]]>*/</script>
 <?php if ($isProduction): ?>
-<script src="scripts/scripts.0c708101.js"></script>
+<script src="scripts/scripts.b7a82d51.js"></script>
 <?php else: ?>
 <script src="scripts/theme.js"></script>
 <script src="scripts/app.js"></script>
