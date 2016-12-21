@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = env('APP_URL', '');
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -213,7 +213,7 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = env('APP_LOG_LEVEL', 0);
+$config['log_threshold'] = 0;
 
 /*
 |--------------------------------------------------------------------------
@@ -272,7 +272,7 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 | application/views/errors/ directory.  Use a full server path with trailing slash.
 |
 */
-$config['error_views_path'] = APPPATH . 'views/classic/errors/';
+$config['error_views_path'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -283,7 +283,7 @@ $config['error_views_path'] = APPPATH . 'views/classic/errors/';
 | application/cache/ directory.  Use a full server path with trailing slash.
 |
 */
-$config['cache_path'] = APPPATH . 'cache/';
+$config['cache_path'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -368,9 +368,9 @@ $config['encryption_key'] = '';
 |
 */
 $config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = env('COOKIE_PREFIX', 'ci') . '_session';
-$config['sess_expiration'] = env('SESSION_LIFETIME', 7200);
-$config['sess_save_path'] = APPPATH . 'cache/sessions/';
+$config['sess_cookie_name'] = 'ci_session';
+$config['sess_expiration'] = 7200;
+$config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
@@ -390,8 +390,8 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= env('COOKIE_PREFIX', '');
-$config['cookie_domain']	= env('COOKIE_DOMAIN', '');
+$config['cookie_prefix']	= '';
+$config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
 $config['cookie_httponly'] 	= FALSE;

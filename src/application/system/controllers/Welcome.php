@@ -11,6 +11,6 @@ class Welcome extends \Shared\Classes\Controller
      */
     public function index_get()
     {
-        $this->load->view($this->getConfig()->get('app.theme') . '/app', ['config' => $this->getConfig()]);
+        $this->load->view($this->getConfig()->get('app.theme') . '/app.blade.php', ['config' => $this->getConfig()]);
     }
 }
