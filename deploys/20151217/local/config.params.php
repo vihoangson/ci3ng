@@ -9,7 +9,7 @@
         'copyright' => 'Copyright 2016 My Company',
         'title' => 'Admin Panel',
         'theme' => 'homer', // homer, inspinia, classic
-        'defaultRoute' => 'staff.index',
+        'defaultRoute' => 'setting.index',
         'imageAllowedExt' => 'gif,jpeg,jpg,png',
         'imageMaxSize' => 2097152 // 2MB
     ],
