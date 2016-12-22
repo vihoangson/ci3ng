@@ -1,6 +1,6 @@
 {
   "name": "chaos/ci3ng",
-  "description": "A CodeIgniter 3 + Doctrine 2 + Angular skeleton application",
+  "description": "A CodeIgniter 3 + Doctrine 2 + Angular boilerplate",
   "type": "project",
   "keywords": ["ntd1712", "chaos", "ci3ng"],
   "homepage": "http://taingheso.com",
@@ -11,15 +11,14 @@
   "require": {
     "chaos/common": "dev-master@dev",
     "ezyang/htmlpurifier": "~4.8",
-    "firebase/php-jwt": "4.0.*",
-    "league/oauth2-client": "1.4.*",
+    "firebase/php-jwt": "~4.0.0",
+    "league/oauth2-client": "~1.4.2",
     "nesbot/carbon": "~1.21",
     "vlucas/phpdotenv": "~2.4",
-    "codeigniter/framework": "3.1.*",
-    "chriskacerguis/codeigniter-restserver": "2.7.*"
+    "codeigniter/framework": "~3.1.2",
+    "chriskacerguis/codeigniter-restserver": "~2.7.3"
   },
   "require-dev": {
-    "mikey179/vfsStream": "~1.6",
     "fzaninotto/faker": "dev-master"
   },
   "autoload": {

@@ -1,16 +1,17 @@
 <?php
 
 use Doctrine\DBAL\Logging\DebugStack,
+    Doctrine\ORM\Tools\Console\ConsoleRunner,
     Chaos\Doctrine\EntityManagerFactory;
 
 define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : env('APP_ENV'));
 define('BASEPATH', true);
 define('APPPATH', __DIR__ . '/application/system/');
 
-global $active_group, $db;
+static $active_group, $db;
 require_once __DIR__ . '/application/shared/bootstrap.php';
-require_once APPPATH . 'config/config.php';
-require_once APPPATH . 'config/database.php';
+require APPPATH . 'config/config.php';
+require APPPATH . 'config/database.php';
 
 $config = [
     'db' => $db[$active_group] + [
@@ -46,4 +47,4 @@ $config = [
 ];
 
 $entityManager = (new EntityManagerFactory)->setConfig($config)->getEntityManager();
-return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager);
+return ConsoleRunner::createHelperSet($entityManager);

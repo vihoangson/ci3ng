@@ -24,14 +24,11 @@ vendor/bin/doctrine orm:schema-tool:update --force
 echo
 echo "Generating proxies ..."
 if [ "$1" == "-f" ] || [ "$1" == "-p" ]; then
-    ls application/admin/cache/proxies/* | grep -v .gitignore | xargs rm -f
     ls application/system/cache/proxies/* | grep -v .gitignore | xargs rm -f
 fi
 vendor/bin/doctrine orm:generate:proxies
 
 echo
 echo "Deleting temporary files ..."
-ls application/admin/cache/sessions/* | grep -v .gitignore | xargs rm -f
-ls application/admin/logs/* | grep -v .gitignore | xargs rm -f
 ls application/system/cache/sessions/* | grep -v .gitignore | xargs rm -f
 ls application/system/logs/* | grep -v .gitignore | xargs rm -f
