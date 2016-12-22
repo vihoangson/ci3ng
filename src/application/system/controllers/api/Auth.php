@@ -10,14 +10,13 @@ use Carbon\Carbon,
  *
  * @method array|string|null post($key = null, $xss_clean = null)
  * @property-read \CI_Session $session
- * @property-read \CI_URI $uri
  */
 class Auth extends \Shared\Classes\Controller
 {
     /** {@inheritdoc} */
     public function index_get()
     {
-        throw new \BadMethodCallException('Unknown method ' . __METHOD__);
+        show_404();
     }
 
     /**
@@ -73,18 +72,19 @@ class Auth extends \Shared\Classes\Controller
             }
         }
 
+        JWT::$leeway = 60;
         $token = JWT::encode([
-            'res' => $user,
-            'sub' => $entity->getId(),
-            'iss' => $this->getConfig()->get('app.url') . '/' . $this->uri->uri_string,
-            'iat' => $ts = Carbon::now()->timestamp,
-            'exp' => Carbon::now()->addSeconds($this->getConfig()->get('expires.expires'))->timestamp,
-            'nbf' => $ts,
-            'jti' => md5(sprintf('jti.%s.%s', $entity->getId(), $ts))
-        ], $this->getConfig()->get('app.key'));
+            'iss' => $appKey = $this->getConfig()->get('app.key'),
+            'sub' => $entity->getUuid() ?: $entity->getId(),
+            'aud' => $appKey,
+            'exp' => Carbon::now()->addSeconds($this->getConfig()->get('session.expires'))->timestamp,
+            'nbf' => $timestamp = Carbon::now()->timestamp,
+            'iat' => $timestamp,
+            'jti' => sha1(sprintf('ci3ng.%s.%s', $appKey, $timestamp)),
+            'context' => ['user' => $user]
+        ], $appKey);
 
         // save into session
-        $this->session->set_userdata('locale', $this->post('locale') ?: @$user['Locale']);
         $this->session->set_userdata('loggedName', $user['Name']);
         $this->session->set_userdata('loggedUser', $user);
 
@@ -94,6 +94,7 @@ class Auth extends \Shared\Classes\Controller
 
     /**
      * The "logout" action
+     * @todo
      */
     public function logout_post()
     {
@@ -103,7 +104,7 @@ class Auth extends \Shared\Classes\Controller
         // }
         // catch (JWTException $e) {}
 
-        $this->session->unset_userdata(['locale', 'loggedName', 'loggedUser']);
+        $this->session->unset_userdata(['loggedName', 'loggedUser']);
         $this->set_response(['success' => true]);
     }
 

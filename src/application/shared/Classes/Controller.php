@@ -15,8 +15,8 @@ abstract class Controller extends AbstractCodeIgniterRestController
     public function __construct()
     {
         static $active_group, $db;
+        require APPPATH . 'config/database.php';
         $config = get_config();
-        require_once APPPATH . 'config/database.php';
 
         parent::__construct(
             array_replace_recursive([
@@ -73,7 +73,7 @@ abstract class Controller extends AbstractCodeIgniterRestController
                 ],
                 'paths' => ['config' => $configPath = __DIR__ . '/../Modules/config.params.php'],
                 'urls' => ['api' => empty($config['index_page']) ? '/api/' : '/' . $config['index_page'] . '/api/']
-            ], require_once $configPath),
+            ], require $configPath),
             require_once __DIR__ . '/../Modules/config.services.php'
         );
     }

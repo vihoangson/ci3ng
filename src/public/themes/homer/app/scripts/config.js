@@ -115,7 +115,7 @@ function runBlocks($http, $rootScope, $state, $transitions, $translate, jwtHelpe
 
             if (!$rootScope.$user) {
                 var decoded = jwtHelper.decodeToken(token);
-                $rootScope.$user = decoded.res;
+                $rootScope.$user = decoded.context.user;
             }
         }
     });
