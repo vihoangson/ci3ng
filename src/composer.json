@@ -15,7 +15,8 @@
     "nesbot/carbon": "~1.21",
     "vlucas/phpdotenv": "~2.4",
     "codeigniter/framework": "~3.1.2",
-    "chriskacerguis/codeigniter-restserver": "~2.7"
+    "chriskacerguis/codeigniter-restserver": "~2.7",
+    "davinder17s/codeigniter-middleware": "*"
   },
   "require-dev": {
     "fzaninotto/faker": "dev-master"
@@ -37,6 +38,17 @@
   "repositories": [{
     "type": "vcs",
     "url": "https://github.com/ntd1712/common"
+  },{
+    "type": "package",
+    "package": {
+      "name": "davinder17s/codeigniter-middleware",
+      "version": "0.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/davinder17s/codeigniter-middleware",
+        "reference": "master"
+      }
+    }
   }],
   "config": {
     "discard-changes": true,

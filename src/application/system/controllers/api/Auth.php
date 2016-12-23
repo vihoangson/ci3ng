@@ -135,4 +135,33 @@ class Auth extends \Shared\Classes\Controller
         // $newToken = $this->auth->setRequest($request)->parseToken()->refresh();
         // $this->output->set_header('Authorization: Bearer ' . $newToken);
     }
+
+    private function verify()
+    {
+        $auth = isset($_SERVER['HTTP_AUTHORIZATION']) ? $_SERVER['HTTP_AUTHORIZATION'] : false;
+
+        if (!$auth)
+        {
+            // Authorization header not found
+        }
+
+        list($jwt) = sscanf($auth, 'Bearer %s');
+
+        if (!$jwt)
+        {
+            // No token found in authorization header?
+        }
+
+        try
+        {
+            $token = JWT::decode($jwt, $secret_key, array('HS256'));
+
+            // check for issuer
+
+            // check for subject
+        }
+        catch (Exception $e) {
+            // rest_auth_invalid_token
+        }
+    }
 }

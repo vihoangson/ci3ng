@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8c3b0f6456c7d87670c462539b1e6673",
-    "content-hash": "fc1b0873e49ff8fba15fb4e8fbae0388",
+    "hash": "8512a5212e2a14f0bf2ef21bfdedcaea",
+    "content-hash": "a038677e18c8eb3ac9ff5f3baf8e7748",
     "packages": [
         {
             "name": "chaos/common",
@@ -171,6 +171,16 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "time": "2014-12-30 15:22:37"
+        },
+        {
+            "name": "davinder17s/codeigniter-middleware",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davinder17s/codeigniter-middleware",
+                "reference": "master"
+            },
+            "type": "library"
         },
         {
             "name": "doctrine/annotations",

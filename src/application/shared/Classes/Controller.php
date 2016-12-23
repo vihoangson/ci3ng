@@ -8,6 +8,8 @@ define('REST_Controller', true);
 /**
  * Class Controller
  * @author ntd1712
+ *
+ * @property-read \CI_Router $router
  */
 abstract class Controller extends AbstractCodeIgniterRestController
 {
@@ -85,4 +87,93 @@ abstract class Controller extends AbstractCodeIgniterRestController
             require_once __DIR__ . '/../Modules/config.services.php'
         );
     }
+
+    /**
+     * Get the middleware assigned to the controller
+     *
+     * @return  array
+     */
+    public function getMiddleware()
+    {
+        return $this->middleware;
+    }
+
+    /**
+     * Register middleware on the controller
+     *
+     * @param   string $middleware
+     * @param   array $options
+     * @return  $this
+     */
+    public function middleware($middleware, array $options = [])
+    {
+        $this->middleware[$middleware] = $options;
+        return $this;
+    }
+
+    protected function runMiddleware()
+    {
+        $this->load->helper('inflector');
+
+        foreach ($this->getMiddleware() as $middleware)
+        {
+            $middlewareArray = explode('|', str_replace(' ', '', $middleware));
+            $middlewareName = $middlewareArray[0];
+            $runMiddleware = true;
+
+            if (isset($middlewareArray[1]))
+            {
+                $options = explode(':', $middlewareArray[1]);
+                $type = $options[0];
+                $methods = explode(',', $options[1]);
+
+                if ($type == 'except')
+                {
+                    if (in_array($this->router->method, $methods))
+                    {
+                        $runMiddleware = false;
+                    }
+                }
+                elseif ($type == 'only')
+                {
+                    if (!in_array($this->router->method, $methods))
+                    {
+                        $runMiddleware = false;
+                    }
+                }
+            }
+
+            $filename = ucfirst(camelize($middlewareName)) . 'Middleware';
+
+            if ($runMiddleware == true)
+            {
+                if (file_exists($middlewarePath = APPPATH . 'middlewares/' . $filename . '.php'))
+                {
+                    require $middlewarePath;
+                    $ci = &get_instance();
+                    $object = new $filename($this, $ci);
+                    $object->run();
+                    $this->middleware[$middlewareName] = $object;
+                }
+                else
+                {
+                    if (ENVIRONMENT == 'development')
+                    {
+                        show_error('Unable to load middleware: ' . $filename . '.php');
+                    }
+                    else
+                    {
+                        show_error('Sorry something went wrong.');
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * The middleware registered on the controller
+     *
+     * @var array
+     */
+    protected $middleware = [];
 }
