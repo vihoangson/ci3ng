@@ -25,6 +25,14 @@ abstract class Controller extends AbstractCodeIgniterRestController
                     'key' => env('APP_KEY'),
                     'url' => rtrim($config['base_url'], '/')
                 ],
+                'auth' => [
+                    'drivers' => [
+                        'jwt' => [
+                            'secret' => env('APP_KEY'),
+                            'ttl' => $config['sess_expiration']
+                        ]
+                    ]
+                ],
                 'db' => $db[$active_group] + [
                     'driver' => $db[$active_group]['dbdriver'],
                     'user' => $db[$active_group]['username'],

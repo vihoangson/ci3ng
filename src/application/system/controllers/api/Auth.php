@@ -1,14 +1,15 @@
 <?php
 
 use Carbon\Carbon,
-    Firebase\JWT\JWT,
-    Chaos\Common\Exceptions\ValidateException;
+    Emarref\Jwt,
+    Chaos\Common\Exceptions;
 
 /**
  * Class Auth
  * @author ntd1712
  *
  * @method array|string|null post($key = null, $xss_clean = null)
+ * @property-read \CI_Output $output
  * @property-read \CI_Session $session
  */
 class Auth extends \Shared\Classes\Controller
@@ -22,7 +23,7 @@ class Auth extends \Shared\Classes\Controller
     /**
      * The "login" action
      *
-     * @throws  ValidateException
+     * @throws  Exceptions\ValidateException
      */
     public function login_post()
     {
@@ -36,12 +37,12 @@ class Auth extends \Shared\Classes\Controller
         // do some checks
         if (empty($this->post('email')) || false === filter_var($this->post('email'), FILTER_VALIDATE_EMAIL))
         {
-            throw new ValidateException('Email is empty or invalid');
+            throw new Exceptions\ValidateException('Email is empty or invalid');
         }
 
         if (empty($this->post('password')))
         {
-            throw new ValidateException('Password is empty');
+            throw new Exceptions\ValidateException('Password is empty');
         }
 
         /** @var \Account\Entities\User $entity */
@@ -49,7 +50,7 @@ class Auth extends \Shared\Classes\Controller
 
         if (null === $entity || !password_verify($this->post('password'), $entity->getPassword()))
         {
-            throw new ValidateException('Invalid credentials');
+            throw new Exceptions\ValidateException('Invalid credentials');
         }
 
         // prepare data
@@ -72,21 +73,22 @@ class Auth extends \Shared\Classes\Controller
             }
         }
 
-        JWT::$leeway = 60;
-        $token = JWT::encode([
-            'iss' => $appKey = $this->getConfig()->get('app.key'),
-            'sub' => $entity->getUuid() ?: $entity->getId(),
-            'aud' => $appKey,
-            'exp' => Carbon::now()->addSeconds($this->getConfig()->get('session.expires'))->timestamp,
-            'nbf' => $timestamp = Carbon::now()->timestamp,
-            'iat' => $timestamp,
-            'jti' => sha1(sprintf('ci3ng.%s.%s', $appKey, $timestamp)),
-            'context' => ['user' => $user]
-        ], $appKey);
-
         // save into session
         $this->session->set_userdata('loggedName', $user['Name']);
         $this->session->set_userdata('loggedUser', $user);
+
+        // generate JWT
+        $algorithm = new Jwt\Algorithm\Hs256($this->getConfig()->get('auth.drivers.jwt.secret'));
+        $token = new Jwt\Token;
+        $token->addClaim(new Jwt\Claim\Issuer($appKey = $this->getConfig()->get('app.key')));
+        $token->addClaim(new Jwt\Claim\Subject($user['Name']));
+        $token->addClaim(new Jwt\Claim\Audience([$appKey]));
+        $token->addClaim(new Jwt\Claim\Expiration(Carbon::now()->addSeconds($this->getConfig()->get('auth.drivers.jwt.ttl'))->timestamp));
+        $token->addClaim(new Jwt\Claim\NotBefore($timestamp = Carbon::now()->timestamp));
+        $token->addClaim(new Jwt\Claim\IssuedAt($timestamp));
+        $token->addClaim(new Jwt\Claim\JwtId(hash_hmac('tiger128,3', sprintf('ci3ng.%s.%s', $appKey, $timestamp), $appKey)));
+        $token->addClaim(new Jwt\Claim\PublicClaim('context', ['user' => $user]));
+        $token = (new Jwt\Jwt)->serialize($token, Jwt\Encryption\Factory::create($algorithm));
 
         // bye!
         $this->set_response(compact('token'));
@@ -112,7 +114,25 @@ class Auth extends \Shared\Classes\Controller
      * The "renewtoken" action
      * @todo
      */
-    public function renewtoken_post()
+    public function renewtoken_get()
     {
+        $token = $this->get('token');
+
+        if (empty($token))
+        {
+            throw new Exceptions\JWTException('A token is required', 400);
+        }
+
+        $algorithm = new Jwt\Algorithm\Hs256($appKey = $this->getConfig()->get('app.key'));
+        $context = new Jwt\Verification\Context(Jwt\Encryption\Factory::create($algorithm));
+        $context->setIssuer($appKey);
+        $context->setSubject($this->session->userdata('loggedName'));
+        $context->setAudience($appKey);
+
+        $jwt = new Jwt\Jwt;
+        $jwt->verify($jwt->deserialize($token), $context);
+
+        // $newToken = $this->auth->setRequest($request)->parseToken()->refresh();
+        // $this->output->set_header('Authorization: Bearer ' . $newToken);
     }
 }

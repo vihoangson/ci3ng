@@ -6,7 +6,7 @@
         'maxItemsPerPage' => 100,
         'minSearchChars' => 4,
         // specific
-        'copyright' => 'Copyright 2016 My Company',
+        'copyright' => 'Copyright (c) 2016 ntd1712',
         'title' => 'Admin Panel',
         'theme' => 'homer', // homer, inspinia, classic
         'defaultRoute' => 'setting.index',
