@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8512a5212e2a14f0bf2ef21bfdedcaea",
+    "hash": "4885d2a17043dac70f850d0164adbbfa",
     "content-hash": "a038677e18c8eb3ac9ff5f3baf8e7748",
     "packages": [
         {
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ntd1712/common.git",
-                "reference": "14937df1928f580242bcfcbda24c1066bc7dd482"
+                "reference": "98198eb385675822e85b5c29d8127fcaeaed29c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ntd1712/common/zipball/14937df1928f580242bcfcbda24c1066bc7dd482",
-                "reference": "14937df1928f580242bcfcbda24c1066bc7dd482",
+                "url": "https://api.github.com/repos/ntd1712/common/zipball/98198eb385675822e85b5c29d8127fcaeaed29c1",
+                "reference": "98198eb385675822e85b5c29d8127fcaeaed29c1",
                 "shasum": ""
             },
             "archive": {
@@ -82,7 +82,7 @@
                 "source": "https://github.com/ntd1712/common/tree/master",
                 "issues": "https://github.com/ntd1712/common/issues"
             },
-            "time": "2016-12-21 15:19:45"
+            "time": "2016-12-25 02:24:49"
         },
         {
             "name": "chriskacerguis/codeigniter-restserver",
