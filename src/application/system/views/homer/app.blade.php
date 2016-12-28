@@ -77,6 +77,7 @@ window.CFG = <?= json_encode(['app' => $config['app'], 'session' => $config['ses
 <script src="scripts/account/role/role.route.js"></script>
 <script src="scripts/account/user/user.route.js"></script>
 <script src="scripts/kintai/staff/staff.route.js"></script>
+<script src="scripts/kintai/blog/blog.route.js"></script>
 <?php endif; ?>
 </body>
 </html><!-- developed by ntd1712 -->
